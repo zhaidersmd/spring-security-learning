@@ -1,5 +1,6 @@
 package com.learn.service;
 
+import com.learn.entity.Users;
 import com.learn.repository.UserDetailsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userDetailsRepo.findByUsername(username).orElseThrow(() ->  new UsernameNotFoundException(""));
+        //return userDetailsRepo.findByUsername(username).orElseThrow(() ->  new UsernameNotFoundException(""));
+
+
+        Users user = userDetailsRepo.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        
+
+        return user;
     }
 }

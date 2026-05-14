@@ -1,5 +1,6 @@
 package com.learn.service;
 
+import com.learn.entity.Role;
 import com.learn.entity.Users;
 import com.learn.repository.UserDetailsRepo;
 import org.springframework.boot.CommandLineRunner;
@@ -15,11 +16,20 @@ public class AdminUserInitialize {
         return args -> {
             if (!userDetailsRepo.findByUsername("admin").isPresent()) {
                 Users user = new Users();
-                user.setUsername("zhaider");
-                user.setPassword(passwordEncoder.encode("infa@123"));
-                user.setRole("ROLE_ADMIN");
+                user.setUsername("admin");
+                user.setPassword(passwordEncoder.encode("12345"));
+                user.setRole(Role.ADMIN);
                 userDetailsRepo.save(user);
                 System.out.println("Default admin user created");
+            }
+
+            if (!userDetailsRepo.findByUsername("user").isPresent()) {
+                Users user = new Users();
+                user.setUsername("user");
+                user.setPassword(passwordEncoder.encode("12345"));
+                user.setRole(Role.USER);
+                userDetailsRepo.save(user);
+                System.out.println("Default user created");
             }
 
 
