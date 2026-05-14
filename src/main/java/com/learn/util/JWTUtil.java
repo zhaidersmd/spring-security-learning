@@ -17,6 +17,7 @@ public class JWTUtil {
     private final String SECRET = "a-string-secret-at-least-256-bits-long-apple-mac";
     private final SecretKey key = Keys.hmacShaKeyFor(SECRET.getBytes());
     public String generateToken(String username) {
+
         return Jwts.builder().
                 setSubject(username)
                 .setIssuedAt(new Date())
